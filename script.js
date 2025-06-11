@@ -49,13 +49,41 @@ const teamMembers = [
 const ulEl = document.getElementById('teams')
 
 //cicliamo nell'oggetto
+const rowEL = document.getElementById('team-cards');
+renderTeam(teamMembers, rowEL);
+// renderTeam(newMembers, sponsorEL);
 
-for (let i = 0; i < teamMembers.length; i++) {
-    const member = teamMembers[i];
 
-    console.log(member);
-    const { name, role, email, img } = member
-    console.log(name, role, email, img)
+function renderTeam(teamMembers, nodeEl) {
+    let members = ""
 
+    for (let i = 0; i < teamMembers.length; i++) {
+        const member = teamMembers[i];
+        const membermarkup = generatemember(member)
+        console.log(membermarkup);
+        members += membermarkup
+        nodeEl.innerHTML = members
+    }
 }
 
+
+
+function generatemember(member) {
+    console.log(member);
+    const { name, role, email, img } = member // {}
+    console.log(name, role, email, img)
+    const membermarkup = `
+    <div class="col">
+                <div class="card">
+                    <img src="${img}" alt="">
+                    <div class="card-body">
+                        <h3>${name}</h3>
+                        <div>${email}</div>
+                        <div>${role}</div>
+                    </div>
+                </div>
+            </div>
+    `
+
+    return membermarkup
+}
